@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket.io</title>
+    <script src="jquery.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        //ket noi len server
+        var socket = io("http://localhost:3000");
+        socket.on("Server-send-data", function (data) {
+            $("#response-server").append(data + ", ");
+        })
+        $(document).ready(function () {
+            //để html render ra hết rồi thì script mới chạy
+            $('#mrA').click(function () {
+                //giá trị t1 là tên event, t2 là giá trị send
+                socket.emit("Client-send-data", "xin chào")
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <h1>Socket.io</h1>
+    <input id="mrA" value="Submit data" type="submit"/>
+    <h2 id="response-server"></h2>
+</body>
+</html>
